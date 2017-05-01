@@ -38,10 +38,14 @@ class Authenticate
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
-                return redirect()->guest('auth/login');
+                return redirect()->guest(route('login.get'));
             }
         }
 
         return $next($request);
     }
 }
+
+// これでログインしないで/usersなどにアクセスした場合には、
+//route('login.get')のログインページにリダイレクトされて、
+//ユーザーにログインしないと見れないことを確認させられる。

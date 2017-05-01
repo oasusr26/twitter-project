@@ -24,3 +24,11 @@ Route::post('signup', 'Auth\AuthController@postRegister')->name('signup.post');
 Route::get('login', 'Auth\AuthController@getLogin')->name('login.get');
 Route::post('login', 'Auth\AuthController@postlogin')->name('login.post');
 Route::get('logout', 'Auth\AuthController@getLogout')->name('logout.get');
+
+// ログイン認証付きのルーティング
+// このグループに書かれたルーティングは必ずログイン認証を確認させる。
+Route::group(['middleware' => 'auth'], function() {
+    Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
+});
+
+
